@@ -1,0 +1,59 @@
+{
+  "locale": "pt-br",
+  "debug": false,
+  "admin": {
+    "enabled": true,
+    "steam": ["steam:11000010e69bb7a"],
+    "discord": ["discord:11000010e69bb7a"],
+    "fivem": ["fivem:11000010e69bb7a"],
+    "groups": ["admin", "ADMIN"],
+    "use_vorp_groups": true
+  },
+  "blips": {
+    "enabled": true,
+    "sprite": 280,
+    "color": 2,
+    "scale": 0.8,
+    "show_all": false
+  },
+  "permissions": {
+    "manage_members": "manage_members",
+    "manage_roles": "manage_roles",
+    "manage_storage": "manage_storage",
+    "manage_vault": "manage_vault",
+    "manage_bank": "manage_bank",
+    "manage_shop": "manage_shop",
+    "manage_craft": "manage_craft",
+    "view_reports": "view_reports"
+  },
+  "companyTypes": {
+    "industry": "Indústria",
+    "service": "Serviço",
+    "commerce": "Comércio",
+    "mixed": "Misto"
+  },
+  "payroll": {
+    "enabled": true,
+    "interval": 3600000,
+    "min_salary": 0,
+    "max_salary": 10000
+  },
+  "storage": {
+    "max_items": 50,
+    "default_capacity": 1000
+  },
+  "bank": {
+    "min_withdraw": 1,
+    "max_withdraw": 100000,
+    "transaction_fee": 0.05
+  },
+  "craft": {
+    "default_time": 5,
+    "require_station": false
+  },
+  "shop": {
+    "max_items": 100,
+    "allow_stock_management": true
+  }
+}
+
