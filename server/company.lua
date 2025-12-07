@@ -20,21 +20,13 @@ lib.callback.register('mx_enterprise:createCompany', function(source, data)
     
     local isAdmin = Utils.IsAdmin(source)
     
-    if data.cnpj then
-        local exists = MySQL.single.await('SELECT id FROM companies WHERE cnpj = ?', {data.cnpj})
-        if exists then
-            return false, 'CNPJ já cadastrado'
-        end
-    end
-    
     local result = MySQL.insert.await([[
-        INSERT INTO companies (name, label, type, cnpj, blip_x, blip_y, blip_z, blip_enabled, blip_sprite, blip_color, meta)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO companies (name, label, type, blip_x, blip_y, blip_z, blip_enabled, blip_sprite, blip_color, meta)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ]], {
         data.name, 
         data.label, 
         data.type, 
-        data.cnpj, 
         data.blip_x or nil,
         data.blip_y or nil,
         data.blip_z or nil,

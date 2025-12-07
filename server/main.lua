@@ -14,7 +14,6 @@ CreateThread(function()
           name VARCHAR(100) NOT NULL,
           label VARCHAR(120) NOT NULL,
           type ENUM('industry','service','commerce','mixed') DEFAULT 'mixed',
-          cnpj VARCHAR(32) UNIQUE,
           blip_x FLOAT NULL,
           blip_y FLOAT NULL,
           blip_z FLOAT NULL,
@@ -183,28 +182,106 @@ lib.callback.register('mx_enterprise:getShop', function(source, companyId)
     return result or {}
 end)
 
--- Callback para listar sprites de blips disponíveis do jo_libs
+-- Callback para listar sprites de blips disponíveis do RedM
 lib.callback.register('mx_enterprise:getAvailableBlipSprites', function(source)
-    -- Lista de sprites comuns do RedM (usando nomes do jo_libs)
+    -- Lista completa de sprites do RedM organizados por categoria
     return {
-        { sprite = 'BLIP_AMBIENT_HORSE', name = 'Cavalo' },
-        { sprite = 'BLIP_AMBIENT_PED', name = 'NPC' },
-        { sprite = 'BLIP_AMBIENT_VEHICLE', name = 'Veículo' },
-        { sprite = 'BLIP_AMBIENT_TRAIN', name = 'Trem' },
-        { sprite = 'BLIP_AMBIENT_BOAT', name = 'Barco' },
-        { sprite = 'BLIP_AMBIENT_STAGE', name = 'Palco' },
-        { sprite = 'BLIP_AMBIENT_CAMP', name = 'Acampamento' },
-        { sprite = 'BLIP_AMBIENT_HIDEOUT', name = 'Esconderijo' },
-        { sprite = 'BLIP_AMBIENT_SHOP', name = 'Loja' },
-        { sprite = 'BLIP_AMBIENT_SALOON', name = 'Salão' },
-        { sprite = 'BLIP_AMBIENT_DOCTOR', name = 'Médico' },
-        { sprite = 'BLIP_AMBIENT_GUNSMITH', name = 'Armeiro' },
-        { sprite = 'BLIP_AMBIENT_BANK', name = 'Banco' },
-        { sprite = 'BLIP_AMBIENT_POST_OFFICE', name = 'Correios' },
-        { sprite = 'BLIP_AMBIENT_TRAIN_STATION', name = 'Estação de Trem' },
-        { sprite = 'BLIP_AMBIENT_OFFICE', name = 'Escritório' },
-        { sprite = 'BLIP_AMBIENT_HOUSE', name = 'Casa' },
-        { sprite = 'BLIP_AMBIENT_TOWN', name = 'Cidade' }
+        -- Ambientais
+        { sprite = 'blip_ambient_coach', name = 'Diligência', hash = 1012165077 },
+        { sprite = 'blip_ambient_herd', name = 'Rebanho', hash = 423351566 },
+        { sprite = 'blip_ambient_hitching_post', name = 'Poste de Amarrar', hash = 1220803671 },
+        { sprite = 'blip_ambient_horse', name = 'Cavalo', hash = -643888085 },
+        { sprite = 'blip_ambient_loan_shark', name = 'Aguarista', hash = 1838354131 },
+        { sprite = 'blip_ambient_newspaper', name = 'Jornal', hash = 587827268 },
+        { sprite = 'blip_ambient_quartermaster', name = 'Intendente', hash = 249721687 },
+        { sprite = 'blip_ambient_riverboat', name = 'Barco Fluvial', hash = 2033397166 },
+        { sprite = 'blip_ambient_telegraph', name = 'Telégrafo', hash = 503049244 },
+        { sprite = 'blip_ambient_sheriff', name = 'Xerife', hash = -693644997 },
+        { sprite = 'blip_ambient_theatre', name = 'Teatro', hash = -417940443 },
+        { sprite = 'blip_ambient_tithing', name = 'Dízimo', hash = -1954662204 },
+        { sprite = 'blip_ambient_train', name = 'Trem', hash = -250506368 },
+        { sprite = 'blip_ambient_wagon', name = 'Carroça', hash = 874255393 },
+        { sprite = 'blip_ambient_warp', name = 'Teletransporte', hash = 784218150 },
+        
+        -- Animais
+        { sprite = 'blip_animal', name = 'Animal', hash = -1646261997 },
+        { sprite = 'blip_animal_skin', name = 'Pele de Animal', hash = 218395012 },
+        
+        -- Serviços
+        { sprite = 'blip_bath_house', name = 'Casa de Banho', hash = -304640465 },
+        { sprite = 'blip_post_office', name = 'Correios', hash = 1861010125 },
+        { sprite = 'blip_post_office_rec', name = 'Correios (Recebido)', hash = 1475382911 },
+        { sprite = 'blip_proc_bank', name = 'Banco', hash = -2128054417 },
+        { sprite = 'blip_saloon', name = 'Salão', hash = 1879260108 },
+        { sprite = 'blip_stable', name = 'Estábulo', hash = -73168905 },
+        { sprite = 'blip_taxidermist', name = 'Taxidermista', hash = -1733535731 },
+        
+        -- Lojas
+        { sprite = 'blip_shop_animal_trapper', name = 'Loja de Armadilhas', hash = -1406874050 },
+        { sprite = 'blip_shop_barber', name = 'Barbearia', hash = -2090472724 },
+        { sprite = 'blip_shop_blacksmith', name = 'Ferreiro', hash = -758970771 },
+        { sprite = 'blip_shop_butcher', name = 'Açougue', hash = -1665418949 },
+        { sprite = 'blip_shop_coach_fencing', name = 'Loja de Cercas', hash = -1989306548 },
+        { sprite = 'blip_shop_doctor', name = 'Médico', hash = -1739686743 },
+        { sprite = 'blip_shop_gunsmith', name = 'Armeiro', hash = -145868367 },
+        { sprite = 'blip_shop_horse', name = 'Loja de Cavalos', hash = 1938782895 },
+        { sprite = 'blip_shop_horse_fencing', name = 'Loja de Cercas (Cavalos)', hash = -1456209806 },
+        { sprite = 'blip_shop_horse_saddle', name = 'Loja de Selas', hash = 469827317 },
+        { sprite = 'blip_shop_market_stall', name = 'Barraca de Mercado', hash = 819673798 },
+        { sprite = 'blip_shop_shady_store', name = 'Loja Suspeita', hash = 531267562 },
+        { sprite = 'blip_shop_store', name = 'Loja', hash = 1475879922 },
+        { sprite = 'blip_shop_tackle', name = 'Loja de Pesca', hash = -852241114 },
+        { sprite = 'blip_shop_tailor', name = 'Alfaiate', hash = 1195729388 },
+        { sprite = 'blip_shop_train', name = 'Loja de Trem', hash = 103490298 },
+        { sprite = 'blip_shop_trainer', name = 'Treinador', hash = 1542275196 },
+        
+        -- Acampamentos
+        { sprite = 'blip_camp_tent', name = 'Tenda de Acampamento', hash = -910004446 },
+        { sprite = 'blip_campfire', name = 'Fogueira', hash = 1754365229 },
+        { sprite = 'blip_campfire_full', name = 'Fogueira Completa', hash = 773587962 },
+        { sprite = 'blip_region_caravan', name = 'Caravana', hash = -1606321000 },
+        { sprite = 'blip_region_hideout', name = 'Esconderijo', hash = -428972082 },
+        
+        -- Itens e Objetos
+        { sprite = 'blip_canoe', name = 'Canoa', hash = 62421675 },
+        { sprite = 'blip_cash_bag', name = 'Saco de Dinheiro', hash = 688589278 },
+        { sprite = 'blip_chest', name = 'Baú', hash = -1138864184 },
+        { sprite = 'blip_grub', name = 'Comida', hash = 935247438 },
+        { sprite = 'blip_hotel_bed', name = 'Cama de Hotel', hash = -211556852 },
+        { sprite = 'blip_plant', name = 'Planta', hash = -675651933 },
+        { sprite = 'blip_saddle', name = 'Sela', hash = -1327110633 },
+        { sprite = 'blip_weapon', name = 'Arma', hash = 549686661 },
+        { sprite = 'blip_weapon_bow', name = 'Arco', hash = -132369645 },
+        { sprite = 'blip_weapon_cannon', name = 'Canhão', hash = -363516712 },
+        
+        -- Suprimentos
+        { sprite = 'blip_supplies_ammo', name = 'Suprimentos: Munição', hash = 1576459965 },
+        { sprite = 'blip_supplies_food', name = 'Suprimentos: Comida', hash = -1852063472 },
+        { sprite = 'blip_supplies_health', name = 'Suprimentos: Saúde', hash = -695368421 },
+        { sprite = 'blip_supply_icon_ammo', name = 'Ícone: Munição', hash = 1378990590 },
+        { sprite = 'blip_supply_icon_food', name = 'Ícone: Comida', hash = 412928073 },
+        { sprite = 'blip_supply_icon_health', name = 'Ícone: Saúde', hash = -924021303 },
+        
+        -- Eventos e Especiais
+        { sprite = 'blip_donate_food', name = 'Doar Comida', hash = -1236018085 },
+        { sprite = 'blip_event_appleseed', name = 'Evento: Appleseed', hash = 1904459580 },
+        { sprite = 'blip_event_castor', name = 'Evento: Castor', hash = -1989725258 },
+        { sprite = 'blip_event_railroad_camp', name = 'Evento: Acampamento Ferroviário', hash = -487631996 },
+        { sprite = 'blip_event_riggs_camp', name = 'Evento: Acampamento Riggs', hash = -1944395098 },
+        { sprite = 'blip_fence_building', name = 'Construção de Cerca', hash = -1179229323 },
+        { sprite = 'blip_mg_poker', name = 'Pôquer', hash = 1243830185 },
+        { sprite = 'blip_photo_studio', name = 'Estúdio Fotográfico', hash = 1364029453 },
+        { sprite = 'blip_poi', name = 'Ponto de Interesse', hash = -2039778370 },
+        { sprite = 'blip_player', name = 'Jogador', hash = -523921054 },
+        { sprite = 'blip_player_coach', name = 'Diligência do Jogador', hash = -361388975 },
+        { sprite = 'blip_proc_home', name = 'Casa', hash = 1586273744 },
+        { sprite = 'blip_proc_home_locked', name = 'Casa (Trancada)', hash = -1498696713 },
+        
+        -- Verão (Summer)
+        { sprite = 'blip_summer_cow', name = 'Vaca (Verão)', hash = 1078668923 },
+        { sprite = 'blip_summer_feed', name = 'Alimentação (Verão)', hash = 669307703 },
+        { sprite = 'blip_summer_guard', name = 'Guarda (Verão)', hash = -1735903728 },
+        { sprite = 'blip_summer_horse', name = 'Cavalo (Verão)', hash = 552659337 }
     }
 end)
 

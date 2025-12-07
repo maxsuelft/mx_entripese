@@ -69,7 +69,7 @@ local function loadShopBlips()
                 -- Criar blip usando jo_libs
                 local location = vec3(company.blip_x, company.blip_y, company.blip_z)
                 local name = company.label or company.name
-                local sprite = company.blip_sprite or 'BLIP_AMBIENT_HORSE' -- Default sprite
+                local sprite = company.blip_sprite or 'blip_ambient_horse' -- Default sprite
                 local color = company.blip_color or 'LIGHT_BLUE'
 
                 local success, blipId = pcall(function()

@@ -13,7 +13,6 @@ export default function CreateCompanyModal({ isOpen, onClose, onSuccess, isAdmin
     name: '',
     label: '',
     type: 'mixed',
-    cnpj: '',
     blip_enabled: false,
     blip_x: null,
     blip_y: null,
@@ -59,7 +58,6 @@ export default function CreateCompanyModal({ isOpen, onClose, onSuccess, isAdmin
           name: '', 
           label: '', 
           type: 'mixed', 
-          cnpj: '',
           blip_enabled: false,
           blip_x: null,
           blip_y: null,
@@ -166,20 +164,6 @@ export default function CreateCompanyModal({ isOpen, onClose, onSuccess, isAdmin
                 </option>
               ))}
             </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">
-              CNPJ (Opcional)
-            </label>
-            <input
-              type="text"
-              name="cnpj"
-              value={formData.cnpj}
-              onChange={handleChange}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-blue-500"
-              placeholder="00.000.000/0000-00"
-            />
           </div>
 
           {isAdmin && (

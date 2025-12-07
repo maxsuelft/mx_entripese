@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS companies (
   name VARCHAR(100) NOT NULL,
   label VARCHAR(120) NOT NULL,
   type ENUM('industry','service','commerce','mixed') DEFAULT 'mixed',
-  cnpj VARCHAR(32) UNIQUE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
   meta JSON DEFAULT NULL,

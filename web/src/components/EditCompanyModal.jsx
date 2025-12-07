@@ -14,7 +14,6 @@ export default function EditCompanyModal({ isOpen, onClose, onSuccess, company, 
     name: '',
     label: '',
     type: 'mixed',
-    cnpj: '',
     blip_enabled: false,
     blip_x: null,
     blip_y: null,
@@ -54,7 +53,6 @@ export default function EditCompanyModal({ isOpen, onClose, onSuccess, company, 
         name: company.name || '',
         label: company.label || '',
         type: company.type || 'mixed',
-        cnpj: company.cnpj || '',
         blip_enabled: company.blip_enabled === 1,
         blip_x: company.blip_x || null,
         blip_y: company.blip_y || null,
@@ -209,19 +207,6 @@ export default function EditCompanyModal({ isOpen, onClose, onSuccess, company, 
                 </option>
               ))}
             </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">
-              CNPJ
-            </label>
-            <input
-              type="text"
-              name="cnpj"
-              value={formData.cnpj}
-              onChange={handleChange}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-blue-500"
-            />
           </div>
 
           {isAdmin && (
